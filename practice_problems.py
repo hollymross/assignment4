@@ -14,9 +14,19 @@ Output: False
 
 def has_duplicates(product_ids):
     # Your implementation here
-    pass
+    dupe = set()
+    for product in product_ids:
+        if product in dupe:
+            return True
+        dupe.add(product)
+    return False
 
+print(has_duplicates([10,20,30,20,40]))
+print(has_duplicates([1,2,3,4,5]))
 
+#This code works by adding the numbers into a set, which does not allow duplicates. The loop goes through all the numbers in the list and compares them to the numbers in the set, and
+#adds the new numbers into the set to be compared. If a duplicate is detected, the loop stops running and returns true because there is a duplicate. If the loop is able to go through
+#the whole list, then this means there were no duplicates found and the code will return false. 
 """
 Problem 2: Order Manager
 
@@ -31,17 +41,20 @@ task_queue.remove_oldest_task() → "Email follow-up"
 """
 
 class TaskQueue:
+
     def __init__(self):
-        # Your initialization here
-        pass
+        self.tasks = []
 
     def add_task(self, task):
-        pass
+        self.tasks.append(task)
 
     def remove_oldest_task(self):
-        pass
-
-
+        return self.tasks.pop(0)
+    
+taskqueue = TaskQueue()
+taskqueue.add_task("Email follow-up")
+taskqueue.add_task("Code review")
+print(taskqueue.remove_oldest_task())
 """
 Problem 3: Unique Value Counter
 
@@ -56,11 +69,18 @@ tracker.get_unique_count() → 2
 """
 
 class UniqueTracker:
+
     def __init__(self):
-        pass
+        self.track = set()
 
     def add(self, value):
-        pass
+        self.track.add(value)
 
     def get_unique_count(self):
-        pass
+        return len(self.track)
+    
+tracker = UniqueTracker()
+tracker.add(10)
+tracker.add(20)
+tracker.add(10)
+print(tracker.get_unique_count())
